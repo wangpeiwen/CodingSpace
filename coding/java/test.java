@@ -70,13 +70,77 @@ public class test {
     //     for()
     // }
 
+
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int carry = 0;
+        // 使用虚拟头节点简化边界处理
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+        
+        // 处理两个链表共有部分
+        while (l1 != null && l2 != null) {
+            int sum = l1.val + l2.val + carry;
+            carry = sum / 10; // 计算进位
+            current.next = new ListNode(sum % 10); // 创建新节点存储当前位结果
+            current = current.next; // 移动指针
+            
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        
+        // 处理l1剩余节点
+        while (l1 != null) {
+            int sum = l1.val + carry;
+            carry = sum / 10;
+            current.next = new ListNode(sum % 10);
+            current = current.next;
+            l1 = l1.next;
+        }
+        
+        // 处理l2剩余节点
+        while (l2 != null) {
+            int sum = l2.val + carry;
+            carry = sum / 10;
+            current.next = new ListNode(sum % 10);
+            current = current.next;
+            l2 = l2.next;
+        }
+        
+        // 处理最后剩余的进位
+        if (carry > 0) {
+            current.next = new ListNode(carry);
+        }
+        
+        // 返回虚拟头节点的下一个节点，即真正的结果链表头
+        return dummy.next;
+    }
+
     public static void main(String[] args) {
         test t = new test();
         // int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         // int target = 3;
         // System.out.println(t.searchMatrix(matrix, target));
-        int[] nums = {1, 3, 2};
-        t.nextPermutation(nums);
-        System.out.println(Arrays.toString(nums));
+        // int[] nums = {1, 3, 2};
+        // t.nextPermutation(nums);
+        // System.out.println(Arrays.toString(nums));
+        ListNode l1 = t.new ListNode(2);
+        l1.next = t.new ListNode(4);
+        l1.next.next = t.new ListNode(3);
+        ListNode l2 = t.new ListNode(5);
+        l2.next = t.new ListNode(6);
+        l2.next.next = t.new ListNode(4);
+        ListNode res = t.addTwoNumbers(l1, l2);
+        while(res != null){
+            System.out.print(res.val + " ");
+            res = res.next;
+        }
     }
 }
