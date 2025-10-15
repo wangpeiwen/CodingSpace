@@ -52,6 +52,18 @@ public class Main {
         permute(str.toCharArray(), 0, results, count);
         return;
     }
+    public int findContentChildren(int[] g, int[] s) {
+        java.util.Arrays.sort(g);
+        java.util.Arrays.sort(s);
+        int i = 0, j = 0;
+        while (i < g.length && j < s.length) {
+            if (g[i] <= s[j]) {
+                i++;
+            }
+            j++;
+        }
+        return i;
+    }
     public static void main(String[] args) {
         createTable();
         Scanner in = new Scanner(System.in);
