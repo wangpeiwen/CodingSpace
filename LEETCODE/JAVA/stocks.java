@@ -1,4 +1,4 @@
-package LEETCODE.DAY1;
+package LEETCODE.JAVA;
 
 public class stocks {
     public int maxProfit(int[] prices) {

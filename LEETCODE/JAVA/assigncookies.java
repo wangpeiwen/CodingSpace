@@ -1,4 +1,4 @@
-package LEETCODE.DAY1;
+package LEETCODE.JAVA;
 
 public class assigncookies {
     public int findContentChildren(int[] g, int[] s) {
